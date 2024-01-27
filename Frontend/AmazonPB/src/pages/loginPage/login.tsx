@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext'; 
+import { useNavigate } from 'react-router-dom';
 
 export const LoginPage: React.FC = () => {
   const [formData, setFormData] = useState({ username: '', password: '' });
   const [loginMessage, setLoginMessage] = useState('');
 
+  const navigate = useNavigate()
   // Use the useAuth hook to access the context
   const { login } = useAuth();
 
@@ -25,6 +27,8 @@ export const LoginPage: React.FC = () => {
       if (response.ok) {
         setLoginMessage(data.message);
         login(formData);
+        console.log(formData);
+        navigate('/home')
       } else {
         setLoginMessage(data.message);
       }
