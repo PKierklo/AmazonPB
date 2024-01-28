@@ -16,7 +16,28 @@ app.post('/login', (req, res) => {
     const user = help.find(u => u.username === username && u.password === password);
 
     if(user){
-        res.json({success: true, message: "Zalogowano"})
+        res.json({success: true, message: "Zalogowano"});
+    }
+    else{
+        res.status(401).json({success: false, message: "Ni działa"})
+    }
+})
+
+app.post('/register', (req, res) =>{
+    const {username, password} = req.body;
+    const help = readUsersFile();
+    const user = help.find(u => u.username === username);
+    if(!user){
+        help.push({username, password});
+        if(writeUsersFile(help))
+        {
+            res.json({success: true, message: "Zarejestrowano"})
+        }
+        else
+        {
+            res.status(401).json({success: false, message: "Ni działa"})
+        }
+
     }
     else{
         res.status(401).json({success: false, message: "Ni działa"})
@@ -36,5 +57,16 @@ function readUsersFile(){
     } catch(error){
         console.error("Ni dziala", error);
         return [];
+    }
+}
+
+function writeUsersFile(data)
+{
+    try{
+        fs.writeFileSync("data.json", JSON.stringify(data),"utf8");
+        return true;
+    } catch(error){
+        console.error("Ni dziala", error);
+        return false;
     }
 }

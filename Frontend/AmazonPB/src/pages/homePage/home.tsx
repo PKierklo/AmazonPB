@@ -33,7 +33,7 @@ const items = [
 
 
 export function HomePage() {
-    const tempSearch = "Vad" // Do kontekstu algo reduxa
+    const tempSearch = "Pot" // Do kontekstu algo reduxa
     return (
         <div>
             Witamy!
@@ -58,6 +58,7 @@ export function HomePage() {
                     </CardContent>
                     <CardActions>
                         <Button size="small">Add to cart</Button>
+                        <Button size="small">Details</Button>
                     </CardActions>
                 </Card>)}
             </Box>

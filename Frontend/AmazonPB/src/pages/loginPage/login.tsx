@@ -27,7 +27,6 @@ export const LoginPage: React.FC = () => {
       if (response.ok) {
         setLoginMessage(data.message);
         login(formData);
-        console.log(formData);
         navigate('/home')
       } else {
         setLoginMessage(data.message);
